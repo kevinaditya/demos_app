@@ -5,9 +5,11 @@
     <tr>
       <th>Order</th>
       <th>Content</th>
+      <% if signed_in? %>
       <th></th>
       <th></th>
       <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -16,9 +18,11 @@
       <tr>
         <td><%= term.order %></td>
         <td><%= term.content %></td>
+	<% if signed_in? %>
         <td><%= link_to 'Show', term %></td>
         <td><%= link_to 'Edit', edit_term_path(term) %></td>
         <td><%= link_to 'Destroy', term, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>        
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +30,6 @@
 
 <br>
 
+<% if signed_in? %>
 <%= link_to 'New Term', new_term_path %>
+<% end %>

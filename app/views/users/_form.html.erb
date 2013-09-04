@@ -1,3 +1,12 @@
+<script type="text/javascript">
+function goFurther(){
+  if (document.getElementById("term").checked == true)
+    document.getElementById("btnSubmit").disabled = false;
+  else
+    document.getElementById("btnSubmit").disabled = true;
+}
+</script>
+
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 
@@ -17,7 +26,9 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+     <input type="checkbox" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
+     <br/><br/>
+     <input disabled="disabled" id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Create my account" />
     <% end %>
   </div>
 </div>
