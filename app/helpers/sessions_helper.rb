@@ -39,7 +39,7 @@ module SessionsHelper
   def check_agreements?
      @term = Term.last(:order => "updated_at asc")
      if @term.nil?
-     1 == 1
+     1 != 1
      else
      @term.updated_at > current_user.accept_terms
      end
