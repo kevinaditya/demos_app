@@ -9,6 +9,9 @@
     </section>
   </aside>
 </div>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -24,6 +27,19 @@
   <strong>Last time accepted terms of use:</strong>
   <%= @user.accept_terms %>
 </p>
+<% if signed_in? %>
+  <% if check_agreements? %>
+    <div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Heads up!</strong> We have just updated our terms and condition. Please check and re-accept the agreement <strong><%= link_to 'here', terms_path %></strong> otherwise, you cannot create a new micropost
+    </div>
+    <br/>
+    <%= link_to 'Accept new terms of use', terms_path, :class => "btn btn-primary" %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <% else %>
+    <%= link_to 'New Micropost', new_micropost_path, :class => "btn btn-primary", :id => "new_micro" %>
+  <% end %>
+<% end %>
+
+
+

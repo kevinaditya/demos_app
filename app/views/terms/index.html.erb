@@ -1,5 +1,6 @@
 <h1>Terms of use</h1>
-
+<p class="info"> &nbsp; &nbsp; &nbsp; = Updated term</p>
+<p class="warning"> &nbsp; &nbsp; &nbsp; = New added term</p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -16,9 +17,13 @@
   <tbody>
     <% @terms.each do |term| %>
       <tr>
-        <td><%= term.order %></td>
+        <td <% if term.created_at > current_user.accept_terms %> class="warning"
+          <% elsif term.updated_at > current_user.accept_terms %> class="info"
+          <% end %>>
+	  <%= term.order %>
+	</td>
         <td><%= term.content %></td>
-	<% if signed_in? %>
+	<% if sys_admin? %>
         <td><%= link_to 'Show', term %></td>
         <td><%= link_to 'Edit', edit_term_path(term) %></td>
         <td><%= link_to 'Destroy', term, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,12 +34,17 @@
 </table>
 
 <br>
+<% if signed_in? %>
+  <% if check_agreements? %>
+    <%= form_tag("users/1", :method => "put") do %>
 
-<%if signed_in? %>
-<%= form_tag({controller: "users", action: "update"}, method: "post")%>
+    <input type="hidden" name="user[accept_terms]" value="<%= Time.now %>" id="term" >
+    <input type="submit" class="btn btn-primary" name="submit" value="I agree this terms of use">
+    <% end %>
+  <% end %>
 
-<input type="hidden" name="accept_terms" value="<%= Time.now %>" id="term" >
-<input type="submit" class="btn btn-primary" name="submit" value="I agree this terms of use">
-<%= link_to 'New Term', new_term_path %>
+  <%if sys_admin? %>
+    <%= link_to 'New Term', new_term_path %>
+  <% end %>
+
 <% end %>
-

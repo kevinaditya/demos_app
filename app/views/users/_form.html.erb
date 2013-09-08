@@ -7,8 +7,6 @@ function goFurther(){
 }
 </script>
 
-<% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
 
 <div class="row">
   <div class="span6 offset3">
@@ -19,6 +17,7 @@ function goFurther(){
 
       <%= f.label :email %>
       <%= f.text_field :email %>
+      
 
       <%= f.label :password %>
       <%= f.password_field :password %>
@@ -26,9 +25,10 @@ function goFurther(){
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-     <input type="checkbox" name="accept_terms" value="<%= Time.now %>" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
+      <input type="checkbox" name="user[accept_terms]" value="<%= Time.now %>" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
+     
      <br/><br/>
-     <input disabled="disabled" id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Create my account" />
+     <input disabled="disabled" id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Submit" />
     <% end %>
   </div>
 </div>

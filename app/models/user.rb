@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
   validates :accept_terms, presence: true
   has_many :microposts
   has_secure_password
-  validates :password, length: { minimum: 6 }
-
+  #validates :password, length: { minimum: 6 }
+  validates :password, :presence =>true, :confirmation => true, :length => { :within => 6..40 }, :on => :create
+  validates :password, :confirmation => true, :length => { :within => 6..40 }, :on => :update, :unless => lambda{ |user| user.password.blank? } 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

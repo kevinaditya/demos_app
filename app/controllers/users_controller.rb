@@ -34,13 +34,6 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation,:accept_terms)
-    end
-
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
@@ -69,6 +62,11 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation,:accept_terms)
     end
 
 end
