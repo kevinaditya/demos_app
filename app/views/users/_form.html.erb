@@ -1,4 +1,7 @@
 <script type="text/javascript">
+$( document ).ready(function() {
+document.getElementById("btnSubmit").disabled = true;
+});
 function goFurther(){
   if (document.getElementById("term").checked == true)
     document.getElementById("btnSubmit").disabled = false;
@@ -28,7 +31,7 @@ function goFurther(){
       <input type="checkbox" name="user[accept_terms]" value="<%= Time.now %>" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
      
      <br/><br/>
-     <input disabled="disabled" id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Submit" />
+     <input id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Submit" />
     <% end %>
   </div>
 </div>
