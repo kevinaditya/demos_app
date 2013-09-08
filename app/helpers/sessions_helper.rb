@@ -46,6 +46,8 @@ module SessionsHelper
   end
 
   def sys_admin?
+    if signed_in?
     current_user.id == 1
+    end 
   end
 end

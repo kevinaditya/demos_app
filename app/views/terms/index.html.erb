@@ -1,6 +1,11 @@
 <h1>Terms of use</h1>
-<p class="info"> &nbsp; &nbsp; &nbsp; = Updated term</p>
-<p class="warning"> &nbsp; &nbsp; &nbsp; = New added term</p>
+<% if signed_in? %>
+  <% if check_agreements? %>
+    <p class="info"> &nbsp; &nbsp; &nbsp; = Updated term</p>
+    <p class="warning"> &nbsp; &nbsp; &nbsp; = New added term</p>
+  <% end %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -17,9 +22,12 @@
   <tbody>
     <% @terms.each do |term| %>
       <tr>
-        <td <% if term.created_at > current_user.accept_terms %> class="warning"
-          <% elsif term.updated_at > current_user.accept_terms %> class="info"
-          <% end %>>
+        <td <%if signed_in? %>
+	      <% if term.created_at > current_user.accept_terms %> class="warning"
+              <% elsif term.updated_at > current_user.accept_terms %> class="info"
+              <% end %>
+             <% end %>
+	>
 	  <%= term.order %>
 	</td>
         <td><%= term.content %></td>
