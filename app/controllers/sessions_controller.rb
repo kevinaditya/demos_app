@@ -6,8 +6,14 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      sign_in user
-      redirect_to user
+      @term = Term.last(:order => "updated_at asc")
+	#sign_in user
+	if (@term.updated_at < user.created_at)
+      	  sign_in user
+      	  redirect_to user
+	else
+	  redirect_to terms_path
+	end
     else
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'

@@ -3,7 +3,6 @@ class CreateTerms < ActiveRecord::Migration
     create_table :terms do |t|
       t.string :content
       t.integer :order
-
       t.timestamps
     end
   end
@@ -14,7 +13,7 @@ class CreateTerms < ActiveRecord::Migration
   def down
     # This might cause trouble if you have strings longer
     # than 255 characters.
-    change_column :your_table, :your_column, :string
+    change_column :your_table, :your_column, :text
   end
 
 end

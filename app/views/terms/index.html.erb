@@ -30,6 +30,11 @@
 
 <br>
 
-<% if signed_in? %>
+<%if signed_in? %>
+<%= form_tag({controller: "users", action: "update"}, method: "post")%>
+
+<input type="hidden" name="accept_terms" value="<%= Time.now %>" id="term" >
+<input type="submit" class="btn btn-primary" name="submit" value="I agree this terms of use">
 <%= link_to 'New Term', new_term_path %>
 <% end %>
+

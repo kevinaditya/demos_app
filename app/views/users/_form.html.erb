@@ -26,7 +26,7 @@ function goFurther(){
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-     <input type="checkbox" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
+     <input type="checkbox" name="accept_terms" value="<%= Time.now %>" id="term" onclick="goFurther()"> I agree this <%= link_to 'terms of use', terms_path %>
      <br/><br/>
      <input disabled="disabled" id="btnSubmit" class="btn btn-large btn-primary" name="commit" type="submit" value="Create my account" />
     <% end %>
